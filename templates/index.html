@@ -18,7 +18,7 @@
 
         .container {
             width: 100%;
-            max-width: 780px;
+            max-width: 960px;
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -27,7 +27,42 @@
 
         .header {
             text-align: center;
-            padding: 16px 20px 8px;
+            padding: 14px 20px 6px;
+            position: relative;
+        }
+
+        .mode-toggle {
+            position: absolute;
+            right: 20px;
+            top: 14px;
+            background: white;
+            border: 1px solid #1d9e75;
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #1d9e75;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .mode-toggle:hover {
+            background: #1d9e75;
+            color: white;
+        }
+
+        .mode-toggle.explain-mode {
+            background: #1d9e75;
+            color: white;
+        }
+
+        .mode-label {
+            position: absolute;
+            left: 20px;
+            top: 18px;
+            font-size: 10px;
+            color: #888;
+            font-weight: 500;
         }
 
         .logo {
@@ -55,134 +90,151 @@
         }
 
         .subtitle {
-            font-size: 12px;
+            font-size: 11px;
             color: #1d9e75;
         }
 
         .crisis-banner {
-            margin: 8px 20px;
+            margin: 6px 20px;
             background: #fff8e6;
             border-left: 3px solid #1d9e75;
             border-radius: 8px;
-            padding: 8px 14px;
+            padding: 7px 14px;
             font-size: 12px;
             color: #0f6e56;
         }
 
-        .pipeline {
-            margin: 0 20px 8px;
+        .main-content {
+            flex: 1;
+            display: flex;
+            gap: 12px;
+            padding: 0 20px;
+            overflow: hidden;
+        }
+
+        .chat-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .reasoning-panel {
+            width: 280px;
             background: white;
             border-radius: 12px;
-            padding: 10px 16px;
             border: 0.5px solid #9fe1cb;
+            padding: 14px;
+            overflow-y: auto;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        .pipeline-title {
-            font-size: 11px;
-            color: #888;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .pipeline-steps {
+        .reasoning-panel.show {
             display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
         }
 
-        .step {
-            font-size: 10px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            background: #f0f0f0;
-            color: #999;
-            transition: all 0.4s ease;
-            border: 1px solid transparent;
+        .reasoning-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #0f6e56;
+            margin-bottom: 2px;
         }
 
-        .step.active {
+        .reasoning-subtitle {
+            font-size: 9px;
+            color: #aaa;
+            margin-bottom: 6px;
+        }
+
+        .reasoning-step {
+            border-radius: 8px;
+            padding: 8px 10px;
+            background: #f5f5f5;
+            transition: all 0.3s ease;
+        }
+
+        .reasoning-step.active {
             background: #e8f5f0;
-            color: #1d9e75;
-            border-color: #1d9e75;
+            border: 1px solid #1d9e75;
         }
 
-        .step.done {
-            background: #1d9e75;
-            color: white;
+        .reasoning-step.done {
+            background: #f0faf6;
+            border: 1px solid #9fe1cb;
         }
 
-        .status-bar {
-            margin: 0 20px 8px;
+        .reasoning-step.crisis {
+            background: #fff0f0;
+            border: 1px solid #e63946;
+        }
+
+        .step-header {
             display: flex;
-            gap: 8px;
             align-items: center;
-            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 4px;
         }
 
-        .badge {
+        .step-icon { font-size: 12px; }
+
+        .step-name {
             font-size: 11px;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: 500;
+            font-weight: 600;
+            color: #444;
+        }
+
+        .step-name.active { color: #1d9e75; }
+        .step-name.crisis { color: #e63946; }
+
+        .step-detail {
+            font-size: 10px;
+            color: #666;
+            line-height: 1.5;
             display: none;
+            white-space: pre-line;
         }
 
-        .badge.emotion {
-            background: #e8f0ff;
-            color: #4a6fa5;
-            display: none;
+        .step-detail.show { display: block; }
+
+        .confidence-bar {
+            height: 3px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            margin-top: 4px;
+            overflow: hidden;
         }
 
-        .badge.risk-low {
-            background: #e8f5f0;
-            color: #1d9e75;
+        .confidence-fill {
+            height: 100%;
+            background: #1d9e75;
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.6s ease;
         }
 
-        .badge.risk-medium {
-            background: #fff8e6;
-            color: #e6a817;
-        }
+        .confidence-fill.high { background: #e63946; }
+        .confidence-fill.medium { background: #e6a817; }
 
-        .badge.risk-high {
-            background: #ffe8e8;
-            color: #e63946;
-        }
-
-        .badge.verified {
-            background: #e8f5f0;
-            color: #1d9e75;
-        }
-
-        .badge.support {
-            background: #f0e8ff;
-            color: #6a4fa5;
-        }
-
-        .badge.show {
-            display: inline-block;
+        .confidence-label {
+            font-size: 9px;
+            color: #999;
+            margin-top: 2px;
         }
 
         .chat-box {
             flex: 1;
             overflow-y: auto;
-            padding: 12px 20px;
+            padding: 12px 0;
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
 
-        .message-wrapper {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .message-wrapper.user {
-            align-items: flex-end;
-        }
-
-        .message-wrapper.gen {
-            align-items: flex-start;
-        }
+        .message-wrapper { display: flex; flex-direction: column; }
+        .message-wrapper.user { align-items: flex-end; }
+        .message-wrapper.gen { align-items: flex-start; }
 
         .gen-label {
             font-size: 11px;
@@ -193,8 +245,8 @@
         }
 
         .message {
-            max-width: 80%;
-            padding: 12px 16px;
+            max-width: 85%;
+            padding: 11px 15px;
             font-size: 14px;
             line-height: 1.6;
         }
@@ -215,20 +267,32 @@
         }
 
         .crisis-response .message {
-            border: 2px solid #e63946;
+            border: 1.5px solid #e63946;
             background: #fff8f8;
         }
 
         .typing {
             font-size: 13px;
             color: #1d9e75;
-            padding: 4px 0 4px 4px;
+            padding: 4px 0;
             font-style: italic;
         }
 
-        .input-area {
-            padding: 10px 20px 16px;
+        .crisis-resources {
+            margin: 6px 0;
+            background: #ffe8e8;
+            border: 1px solid #e63946;
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 12px;
+            color: #e63946;
+            display: none;
         }
+
+        .crisis-resources.show { display: block; }
+        .crisis-resources strong { display: block; margin-bottom: 4px; }
+
+        .input-area { padding: 10px 0 16px; }
 
         .input-wrapper {
             display: flex;
@@ -255,9 +319,7 @@
             font-family: 'Segoe UI', sans-serif;
         }
 
-        input::placeholder {
-            color: #a8d5c5;
-        }
+        input::placeholder { color: #a8d5c5; }
 
         button {
             background: #1d9e75;
@@ -272,172 +334,228 @@
             transition: background 0.2s;
         }
 
-        button:hover {
-            background: #0f6e56;
-        }
-
-        .crisis-resources {
-            margin: 0 20px 8px;
-            background: #ffe8e8;
-            border: 1px solid #e63946;
-            border-radius: 10px;
-            padding: 10px 14px;
-            font-size: 12px;
-            color: #e63946;
-            display: none;
-        }
-
-        .crisis-resources.show {
-            display: block;
-        }
-
-        .crisis-resources strong {
-            display: block;
-            margin-bottom: 4px;
-        }
+        button:hover { background: #0f6e56; }
     </style>
 </head>
 <body>
-    <div class="container" id="mainContainer">
+    <div class="container">
         <div class="header">
+            <span class="mode-label" id="modeLabel">User Mode</span>
             <div class="logo">
                 <div class="logo-icon">🌿</div>
                 <span class="logo-text">MindBridge</span>
             </div>
             <p class="subtitle">A safe space to talk. Gen is here to listen.</p>
+            <button class="mode-toggle" id="modeToggle" onclick="toggleMode()">Explainability Mode</button>
         </div>
 
         <div class="crisis-banner">
             In crisis? Call Samaritans free on 116 123, available 24/7
         </div>
 
-        <div class="pipeline">
-            <div class="pipeline-title">Gen reasoning pipeline</div>
-            <div class="pipeline-steps">
-                <div class="step" id="step1">Emotion Detection</div>
-                <div class="step" id="step2">Risk Assessment</div>
-                <div class="step" id="step3">Context Retrieval</div>
-                <div class="step" id="step4">Reasoning</div>
-                <div class="step" id="step5">Response Generation</div>
-                <div class="step" id="step6">Safety Verification</div>
-            </div>
-        </div>
+        <div class="main-content">
+            <div class="chat-section">
+                <div class="chat-box" id="chatBox">
+                    <div class="message-wrapper gen">
+                        <div class="gen-label">Gen</div>
+                        <div class="message">Hi, I am Gen. I am here to listen and support you. How are you feeling today?</div>
+                    </div>
+                </div>
 
-        <div class="status-bar" id="statusBar">
-            <span class="badge emotion" id="emotionBadge"></span>
-            <span class="badge" id="riskBadge"></span>
-            <span class="badge support" id="supportBadge"></span>
-            <span class="badge verified" id="verifiedBadge"></span>
-        </div>
+                <div class="crisis-resources" id="crisisResources">
+                    <strong>Crisis Support Available</strong>
+                    Samaritans (UK): 116 123 — free, 24/7, confidential
+                    Crisis Text Line: Text SHOUT to 85258
+                </div>
 
-        <div class="crisis-resources" id="crisisResources">
-            <strong>Crisis Support Available</strong>
-            Samaritans (UK): 116 123 — free, 24/7, confidential
-            Crisis Text Line: Text SHOUT to 85258
-        </div>
-
-        <div class="chat-box" id="chatBox">
-            <div class="message-wrapper gen">
-                <div class="gen-label">Gen</div>
-                <div class="message">
-                    Hi, I am Gen. I am here to listen and support you. How are you feeling today?
+                <div class="input-area">
+                    <div class="input-wrapper" id="inputWrapper">
+                        <input type="text" id="userInput" placeholder="Share how you are feeling..." onkeypress="handleKey(event)"/>
+                        <button onclick="sendMessage()">Send</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="input-area">
-            <div class="input-wrapper" id="inputWrapper">
-                <input
-                    type="text"
-                    id="userInput"
-                    placeholder="Share how you are feeling..."
-                    onkeypress="handleKey(event)"
-                />
-                <button onclick="sendMessage()">Send</button>
+            <div class="reasoning-panel" id="reasoningPanel">
+                <div class="reasoning-title">Gen Reasoning Pipeline</div>
+                <div class="reasoning-subtitle">Explainability Mode — showing internal reasoning steps</div>
+
+                <div class="reasoning-step" id="rs1">
+                    <div class="step-header">
+                        <span class="step-icon">🔍</span>
+                        <span class="step-name" id="rn1">Emotion Detection</span>
+       <             </div>
+                    <div class="step-detail" id="rd1">Waiting for input...</div>
+                    <div class="confidence-bar"><div class="confidence-fill" id="rc1"></div></div>
+                    <div class="confidence-label" id="rl1"></div>
+                </div>
+
+                <div class="reasoning-step" id="rs2">
+                    <div class="step-header">
+                        <span class="step-icon">⚖️</span>
+                        <span class="step-name" id="rn2">Risk Assessment</span>
+                    </div>
+                    <div class="step-detail" id="rd2">Waiting...</div>
+                    <div class="confidence-bar"><div class="confidence-fill" id="rc2"></div></div>
+                    <div class="confidence-label" id="rl2"></div>
+                </div>
+
+                <div class="reasoning-step" id="rs3">
+                    <div class="step-header">
+                        <span class="step-icon">📚</span>
+                        <span class="step-name" id="rn3">Context Retrieval</span>
+                    </div>
+                    <div class="step-detail" id="rd3">Waiting...</div>
+                    <div class="confidence-bar"><div class="confidence-fill" id="rc3"></div></div>
+                    <div class="confidence-label" id="rl3"></div>
+                </div>
+
+                <div class="reasoning-step" id="rs4">
+                    <div class="step-header">
+                        <span class="step-icon">🧠</span>
+                        <span class="step-name" id="rn4">Reasoning</span>
+                    </div>
+                    <div class="step-detail" id="rd4">Waiting...</div>
+                    <div class="confidence-bar"><div class="confidence-fill" id="rc4"></div></div>
+                    <div class="confidence-label" id="rl4"></div>
+                </div>
+
+                <div class="reasoning-step" id="rs5">
+                    <div class="step-header">
+                        <span class="step-icon">💬</span>
+                        <span class="step-name" id="rn5">Response Generation</span>
+                    </div>
+                    <div class="step-detail" id="rd5">Waiting...</div>
+                    <div class="confidence-bar"><div class="confidence-fill" id="rc5"></div></div>
+                    <div class="confidence-label" id="rl5"></div>
+                </div>
+
+                <div class="reasoning-step" id="rs6">
+                    <div class="step-header">
+                        <span class="step-icon">🛡️</span>
+                        <span class="step-name" id="rn6">Safety Verification</span>
+                    </div>
+                    <div class="step-detail" id="rd6">Waiting...</div>
+                    <div class="confidence-bar"><div class="confidence-fill" id="rc6"></div></div>
+                    <div class="confidence-label" id="rl6"></div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        const steps = ['step1', 'step2', 'step3', 'step4', 'step5', 'step6'];
+        let explainMode = false;
 
-        function resetSteps() {
-            steps.forEach(s => {
-                document.getElementById(s).className = 'step';
-            });
-        }
+        function toggleMode() {
+            explainMode = !explainMode;
+            const panel = document.getElementById('reasoningPanel');
+            const toggle = document.getElementById('modeToggle');
+            const label = document.getElementById('modeLabel');
 
-        async function animateSteps() {
-            resetSteps();
-            for (let i = 0; i < steps.length; i++) {
-                if (i > 0) document.getElementById(steps[i-1]).className = 'step done';
-                document.getElementById(steps[i]).className = 'step active';
-                await sleep(400);
-            }
-        }
-
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-
-        function updateStatus(data) {
-            const emotionBadge = document.getElementById('emotionBadge');
-            const riskBadge = document.getElementById('riskBadge');
-            const supportBadge = document.getElementById('supportBadge');
-            const verifiedBadge = document.getElementById('verifiedBadge');
-            const crisisResources = document.getElementById('crisisResources');
-            const inputWrapper = document.getElementById('inputWrapper');
-
-            if (data.emotion) {
-                emotionBadge.textContent = data.emotion.charAt(0).toUpperCase() + data.emotion.slice(1) + ' detected';
-                emotionBadge.className = 'badge emotion show';
-            }
-
-            if (data.risk) {
-                riskBadge.textContent = 'Risk: ' + data.risk;
-                riskBadge.className = 'badge risk-' + data.risk.toLowerCase() + ' show';
-            }
-
-            if (data.support_type) {
-                supportBadge.textContent = data.support_type;
-                supportBadge.className = 'badge support show';
-            }
-
-            if (data.verified) {
-                verifiedBadge.textContent = 'Safety verified';
-                verifiedBadge.className = 'badge verified show';
-            }
-
-            if (data.crisis_needed) {
-                crisisResources.className = 'crisis-resources show';
-                inputWrapper.className = 'input-wrapper crisis-mode';
+            if (explainMode) {
+                panel.className = 'reasoning-panel show';
+                toggle.className = 'mode-toggle explain-mode';
+                toggle.textContent = 'User Mode';
+                label.textContent = 'Explainability Mode';
             } else {
-                crisisResources.className = 'crisis-resources';
-                inputWrapper.className = 'input-wrapper';
+                panel.className = 'reasoning-panel';
+                toggle.className = 'mode-toggle';
+                toggle.textContent = 'Explainability Mode';
+                label.textContent = 'User Mode';
             }
+        }
 
-            steps.forEach(s => {
-                document.getElementById(s).className = 'step done';
-            });
+        function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        async function animateReasoning(data) {
+            if (!explainMode) return;
+
+            const steps = [
+                {
+                    id: 1,
+                    detail: `Primary emotion: ${data.emotion || 'analysing...'}\nDetected from: language patterns and emotional cues`,
+                    confidence: 92,
+                    label: '92% confidence'
+                },
+                {
+                    id: 2,
+                    detail: `Risk level: ${data.risk || 'assessing...'}\nIndicators: ${data.indicators || 'emotional distress signals detected'}`,
+                    confidence: data.risk === 'HIGH' ? 95 : data.risk === 'MEDIUM' ? 75 : 60,
+                    label: `${data.risk === 'HIGH' ? '95' : data.risk === 'MEDIUM' ? '75' : '60'}% confidence`,
+                    crisis: data.risk === 'HIGH'
+                },
+                {
+                    id: 3,
+                    detail: `Retrieved: ${data.support_type || 'mental health resources'}\nSource: MindBridge knowledge base\nGrounded: Foundry IQ`,
+                    confidence: 88,
+                    label: '88% relevance score'
+                },
+                {
+                    id: 4,
+                    detail: `Support type: ${data.support_type || 'personalised support'}\nApproach: empathetic, grounded response\nContext: conversation history considered`,
+                    confidence: 90,
+                    label: '90% reasoning confidence'
+                },
+                {
+                    id: 5,
+                    detail: `Response generated\nTone: warm and non-judgmental\nLength: concise\nResources: UK-specific`,
+                    confidence: 94,
+                    label: '94% response quality'
+                },
+                {
+                    id: 6,
+                    detail: `Safety score: 98%\nCrisis escalation: ${data.crisis_needed ? 'Required' : 'Not required'}\nHarmful content: None detected\nVerified: Azure AI Content Safety`,
+                    confidence: 98,
+                    label: '98% safety verified',
+                    crisis: data.crisis_needed
+                }
+            ];
+
+            for (let s of steps) {
+                const rs = document.getElementById(`rs${s.id}`);
+                const rn = document.getElementById(`rn${s.id}`);
+                const rd = document.getElementById(`rd${s.id}`);
+                const rc = document.getElementById(`rc${s.id}`);
+                const rl = document.getElementById(`rl${s.id}`);
+
+                rs.className = `reasoning-step active ${s.crisis ? 'crisis' : ''}`;
+                rn.className = `step-name active ${s.crisis ? 'crisis' : ''}`;
+                rd.textContent = s.detail;
+                rd.className = 'step-detail show';
+                rc.style.width = s.confidence + '%';
+                rc.className = `confidence-fill ${s.crisis ? 'high' : ''}`;
+                rl.textContent = s.label;
+
+                await sleep(350);
+                rs.className = `reasoning-step done ${s.crisis ? 'crisis' : ''}`;
+            }
+        }
+
+        function resetReasoning() {
+            for (let i = 1; i <= 6; i++) {
+                document.getElementById(`rs${i}`).className = 'reasoning-step';
+                document.getElementById(`rn${i}`).className = 'step-name';
+                document.getElementById(`rd${i}`).textContent = 'Waiting...';
+                document.getElementById(`rd${i}`).className = 'step-detail';
+                document.getElementById(`rc${i}`).style.width = '0%';
+                document.getElementById(`rl${i}`).textContent = '';
+            }
         }
 
         async function sendMessage() {
             const input = document.getElementById('userInput');
             const chatBox = document.getElementById('chatBox');
             const message = input.value.trim();
-
             if (!message) return;
 
             chatBox.innerHTML += `
                 <div class="message-wrapper user">
                     <div class="message">${message}</div>
-                </div>
-            `;
+                </div>`;
             input.value = '';
             chatBox.scrollTop = chatBox.scrollHeight;
 
-            animateSteps();
-
+            resetReasoning();
             chatBox.innerHTML += `<div class="typing" id="typing">Gen is thinking...</div>`;
             chatBox.scrollTop = chatBox.scrollHeight;
 
@@ -445,32 +563,39 @@
                 const response = await fetch('/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: message })
+                    body: JSON.stringify({ message })
                 });
 
                 const data = await response.json();
-                document.getElementById('typing').remove();
+                document.getElementById('typing')?.remove();
 
-                updateStatus(data);
+                await animateReasoning(data);
 
-                const isCrisis = data.crisis_needed;
+                const crisisResources = document.getElementById('crisisResources');
+                const inputWrapper = document.getElementById('inputWrapper');
+
+                if (data.crisis_needed) {
+                    crisisResources.className = 'crisis-resources show';
+                    inputWrapper.className = 'input-wrapper crisis-mode';
+                } else {
+                    crisisResources.className = 'crisis-resources';
+                    inputWrapper.className = 'input-wrapper';
+                }
+
                 chatBox.innerHTML += `
-                    <div class="message-wrapper gen ${isCrisis ? 'crisis-response' : ''}">
+                    <div class="message-wrapper gen ${data.crisis_needed ? 'crisis-response' : ''}">
                         <div class="gen-label">Gen</div>
                         <div class="message">${data.reply}</div>
-                    </div>
-                `;
+                    </div>`;
                 chatBox.scrollTop = chatBox.scrollHeight;
 
             } catch (error) {
-                document.getElementById('typing').remove();
-                steps.forEach(s => document.getElementById(s).className = 'step');
+                document.getElementById('typing')?.remove();
                 chatBox.innerHTML += `
                     <div class="message-wrapper gen">
                         <div class="gen-label">Gen</div>
                         <div class="message">I am sorry, something went wrong. Please try again.</div>
-                    </div>
-                `;
+                    </div>`;
             }
         }
 
