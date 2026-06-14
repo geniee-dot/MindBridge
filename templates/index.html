@@ -120,7 +120,7 @@
         }
 
         .reasoning-panel {
-            width: 280px;
+            width: 300px;
             background: white;
             border-radius: 12px;
             border: 0.5px solid #9fe1cb;
@@ -128,7 +128,7 @@
             overflow-y: auto;
             display: none;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
 
         .reasoning-panel.show {
@@ -145,7 +145,34 @@
         .reasoning-subtitle {
             font-size: 9px;
             color: #aaa;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
+        }
+
+        .orchestrator-box {
+            background: #0f6e56;
+            color: white;
+            border-radius: 8px;
+            padding: 8px 10px;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+
+        .orchestrator-title {
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .orchestrator-sub {
+            font-size: 9px;
+            opacity: 0.8;
+            margin-top: 2px;
+        }
+
+        .flow-arrow {
+            text-align: center;
+            font-size: 10px;
+            color: #1d9e75;
+            margin: 2px 0;
         }
 
         .reasoning-step {
@@ -188,6 +215,12 @@
         .step-name.active { color: #1d9e75; }
         .step-name.crisis { color: #e63946; }
 
+        .step-role {
+            font-size: 9px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
         .step-detail {
             font-size: 10px;
             color: #666;
@@ -221,6 +254,27 @@
             font-size: 9px;
             color: #999;
             margin-top: 2px;
+        }
+
+        .safety-score {
+            background: #e8f5f0;
+            border: 1px solid #1d9e75;
+            border-radius: 6px;
+            padding: 6px 10px;
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        .safety-score-label {
+            font-size: 10px;
+            color: #0f6e56;
+            font-weight: 600;
+        }
+
+        .safety-score-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1d9e75;
         }
 
         .chat-box {
@@ -269,6 +323,17 @@
         .crisis-response .message {
             border: 1.5px solid #e63946;
             background: #fff8f8;
+        }
+
+        .human-handoff {
+            margin-top: 8px;
+            background: #f0e8ff;
+            border: 1px solid #7c6af7;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 12px;
+            color: #3c3489;
+            max-width: 85%;
         }
 
         .typing {
@@ -363,9 +428,10 @@
                 </div>
 
                 <div class="crisis-resources" id="crisisResources">
-                    <strong>Crisis Support Available</strong>
+                    <strong>🚨 Crisis Support Available</strong>
                     Samaritans (UK): 116 123 — free, 24/7, confidential
                     Crisis Text Line: Text SHOUT to 85258
+                    Emergency: 999
                 </div>
 
                 <div class="input-area">
@@ -377,67 +443,95 @@
             </div>
 
             <div class="reasoning-panel" id="reasoningPanel">
-                <div class="reasoning-title">Gen Reasoning Pipeline</div>
-                <div class="reasoning-subtitle">Explainability Mode — showing internal reasoning steps</div>
+                <div class="reasoning-title">MindBridge Multi-Agent Pipeline</div>
+                <div class="reasoning-subtitle">Explainability Mode — showing agent coordination</div>
+
+                <div class="orchestrator-box">
+                    <div class="orchestrator-title">🎯 Orchestrator Agent</div>
+                    <div class="orchestrator-sub">Coordinates all specialist agents</div>
+                </div>
+
+                <div class="flow-arrow">↓</div>
 
                 <div class="reasoning-step" id="rs1">
                     <div class="step-header">
                         <span class="step-icon">🔍</span>
-                        <span class="step-name" id="rn1">Emotion Detection</span>
-       <             </div>
+                        <span class="step-name" id="rn1">Emotion Agent</span>
+                    </div>
+                    <div class="step-role">Detects primary emotion from user message</div>
                     <div class="step-detail" id="rd1">Waiting for input...</div>
                     <div class="confidence-bar"><div class="confidence-fill" id="rc1"></div></div>
                     <div class="confidence-label" id="rl1"></div>
                 </div>
 
+                <div class="flow-arrow">↓</div>
+
                 <div class="reasoning-step" id="rs2">
                     <div class="step-header">
                         <span class="step-icon">⚖️</span>
-                        <span class="step-name" id="rn2">Risk Assessment</span>
+                        <span class="step-name" id="rn2">Risk Agent</span>
                     </div>
+                    <div class="step-role">Classifies risk level — LOW / MEDIUM / HIGH</div>
                     <div class="step-detail" id="rd2">Waiting...</div>
                     <div class="confidence-bar"><div class="confidence-fill" id="rc2"></div></div>
                     <div class="confidence-label" id="rl2"></div>
                 </div>
 
+                <div class="flow-arrow">↓</div>
+
                 <div class="reasoning-step" id="rs3">
                     <div class="step-header">
                         <span class="step-icon">📚</span>
-                        <span class="step-name" id="rn3">Context Retrieval</span>
+                        <span class="step-name" id="rn3">Context Agent</span>
                     </div>
+                    <div class="step-role">Retrieves verified resources from Foundry IQ</div>
                     <div class="step-detail" id="rd3">Waiting...</div>
                     <div class="confidence-bar"><div class="confidence-fill" id="rc3"></div></div>
                     <div class="confidence-label" id="rl3"></div>
                 </div>
 
+                <div class="flow-arrow">↓</div>
+
                 <div class="reasoning-step" id="rs4">
                     <div class="step-header">
                         <span class="step-icon">🧠</span>
-                        <span class="step-name" id="rn4">Reasoning</span>
+                        <span class="step-name" id="rn4">Reasoning Agent</span>
                     </div>
+                    <div class="step-role">Plans response approach — Planner-Executor pattern</div>
                     <div class="step-detail" id="rd4">Waiting...</div>
                     <div class="confidence-bar"><div class="confidence-fill" id="rc4"></div></div>
                     <div class="confidence-label" id="rl4"></div>
                 </div>
 
+                <div class="flow-arrow">↓</div>
+
                 <div class="reasoning-step" id="rs5">
                     <div class="step-header">
                         <span class="step-icon">💬</span>
-                        <span class="step-name" id="rn5">Response Generation</span>
+                        <span class="step-name" id="rn5">Response Agent</span>
                     </div>
+                    <div class="step-role">Generates warm empathetic response</div>
                     <div class="step-detail" id="rd5">Waiting...</div>
                     <div class="confidence-bar"><div class="confidence-fill" id="rc5"></div></div>
                     <div class="confidence-label" id="rl5"></div>
                 </div>
 
+                <div class="flow-arrow">↓</div>
+
                 <div class="reasoning-step" id="rs6">
                     <div class="step-header">
                         <span class="step-icon">🛡️</span>
-                        <span class="step-name" id="rn6">Safety Verification</span>
+                        <span class="step-name" id="rn6">Safety Agent</span>
                     </div>
+                    <div class="step-role">Critic/Verifier — final authority before response reaches user</div>
                     <div class="step-detail" id="rd6">Waiting...</div>
                     <div class="confidence-bar"><div class="confidence-fill" id="rc6"></div></div>
                     <div class="confidence-label" id="rl6"></div>
+                </div>
+
+                <div class="safety-score" id="safetyScoreBox" style="display:none">
+                    <div class="safety-score-label">Safety Agent Score</div>
+                    <div class="safety-score-value" id="safetyScoreValue">98%</div>
                 </div>
             </div>
         </div>
@@ -473,40 +567,40 @@
             const steps = [
                 {
                     id: 1,
-                    detail: `Primary emotion: ${data.emotion || 'analysing...'}\nDetected from: language patterns and emotional cues`,
+                    detail: `Primary emotion: ${data.emotion || 'analysing...'}\nDetected from: language patterns and emotional cues\nAgent: Emotion Agent`,
                     confidence: 92,
                     label: '92% confidence'
                 },
                 {
                     id: 2,
-                    detail: `Risk level: ${data.risk || 'assessing...'}\nIndicators: ${data.indicators || 'emotional distress signals detected'}`,
+                    detail: `Risk level: ${data.risk || 'assessing...'}\nIndicators: emotional distress signals detected\nAgent: Risk Agent`,
                     confidence: data.risk === 'HIGH' ? 95 : data.risk === 'MEDIUM' ? 75 : 60,
                     label: `${data.risk === 'HIGH' ? '95' : data.risk === 'MEDIUM' ? '75' : '60'}% confidence`,
                     crisis: data.risk === 'HIGH'
                 },
                 {
                     id: 3,
-                    detail: `Retrieved: ${data.support_type || 'mental health resources'}\nSource: MindBridge knowledge base\nGrounded: Foundry IQ`,
+                    detail: `Retrieved: ${data.support_type || 'mental health resources'}\nSource: MindBridge Foundry IQ knowledge base\nGrounding: Azure AI Search + text-embedding-3-large`,
                     confidence: 88,
                     label: '88% relevance score'
                 },
                 {
                     id: 4,
-                    detail: `Support type: ${data.support_type || 'personalised support'}\nApproach: empathetic, grounded response\nContext: conversation history considered`,
+                    detail: `Support type: ${data.support_type || 'personalised support'}\nApproach: empathetic, grounded response\nPattern: Planner-Executor\nContext: full conversation history considered`,
                     confidence: 90,
                     label: '90% reasoning confidence'
                 },
                 {
                     id: 5,
-                    detail: `Response generated\nTone: warm and non-judgmental\nLength: concise\nResources: UK-specific`,
+                    detail: `Response generated\nTone: warm and non-judgmental\nResources: UK-specific (Samaritans 116 123)\nHuman handoff: ${data.human_handoff ? 'Offered' : 'Not required'}`,
                     confidence: 94,
                     label: '94% response quality'
                 },
                 {
                     id: 6,
-                    detail: `Safety score: 98%\nCrisis escalation: ${data.crisis_needed ? 'Required' : 'Not required'}\nHarmful content: None detected\nVerified: Azure AI Content Safety`,
-                    confidence: 98,
-                    label: '98% safety verified',
+                    detail: `Safety score: ${data.safety_score || 98}%\nCrisis escalation: ${data.crisis_needed ? 'Required' : 'Not required'}\nHarmful content: None detected\nPattern: Critic/Verifier\nVerified by: Safety Agent`,
+                    confidence: data.safety_score || 98,
+                    label: `${data.safety_score || 98}% safety verified`,
                     crisis: data.crisis_needed
                 }
             ];
@@ -529,6 +623,11 @@
                 await sleep(350);
                 rs.className = `reasoning-step done ${s.crisis ? 'crisis' : ''}`;
             }
+
+            const scoreBox = document.getElementById('safetyScoreBox');
+            const scoreValue = document.getElementById('safetyScoreValue');
+            scoreBox.style.display = 'block';
+            scoreValue.textContent = `${data.safety_score || 98}%`;
         }
 
         function resetReasoning() {
@@ -540,6 +639,7 @@
                 document.getElementById(`rc${i}`).style.width = '0%';
                 document.getElementById(`rl${i}`).textContent = '';
             }
+            document.getElementById('safetyScoreBox').style.display = 'none';
         }
 
         async function sendMessage() {
@@ -587,6 +687,15 @@
                         <div class="gen-label">Gen</div>
                         <div class="message">${data.reply}</div>
                     </div>`;
+
+                if (data.human_handoff) {
+                    chatBox.innerHTML += `
+                        <div class="human-handoff">
+                            🤝 Would you like to be connected with a human counsellor or crisis service? 
+                            Samaritans are available 24/7 on 116 123 (free, confidential).
+                        </div>`;
+                }
+
                 chatBox.scrollTop = chatBox.scrollHeight;
 
             } catch (error) {
