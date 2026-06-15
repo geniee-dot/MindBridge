@@ -1,9 +1,9 @@
 
-# 🌿 MindBridge — AI Mental Health Reasoning Agent
+# 🌿 MindBridge - AI Mental Health Reasoning Agent
 
 > An AI agent that detects emotional crisis, explains its reasoning, and routes users to verified support before a situation escalates.
 
-Built for the **Microsoft Agents League Hackathon 2026 — Track 2: Reasoning Agents**
+Built for the **Microsoft Agents League Hackathon 2026 - Track 2: Reasoning Agents**
 
 ---
 
@@ -205,11 +205,11 @@ MindBridge/
 ## 👩🏾‍💻 Built By
 
 **Onyinye Eugenia Asadu**
-MSc Data Science and Artificial Intelligence — Sheffield Hallam University
+MSc Data Science and Artificial Intelligence - Sheffield Hallam University
 Background: Database Engineer, Nigeria Interbank Settlement System (NIBSS)
-Intended PhD research: Privacy-Preserving AI for Mental Health Detection
 
-This project is a direct extension of academic purpose and professional experience — not just a hackathon entry, but the foundation of a research trajectory.
+
+This project is a direct extension of academic purpose and professional experience 
 
 ---
 
