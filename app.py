@@ -132,7 +132,25 @@ def chat():
             "safety_score": parsed.get("safety_score", 98),
             "human_handoff": parsed.get("human_handoff", False)
         })
-    except:
+    except Exception as e:
+        # Try to extract response from raw text if JSON parsing fails
+        if '"response":' in raw:
+            try:
+                response_start = raw.find('"response":') + 12
+                response_end = raw.find('",', response_start)
+                extracted = raw[response_start:response_end]
+                return jsonify({
+                    "reply": extracted,
+                    "emotion": "crisis" if "crisis" in raw.lower() else "",
+                    "risk": "HIGH" if "HIGH" in raw else "LOW",
+                    "support_type": "crisis resources" if "crisis" in raw.lower() else "",
+                    "crisis_needed": "crisis" in raw.lower(),
+                    "verified": True,
+                    "safety_score": 98,
+                    "human_handoff": "crisis" in raw.lower()
+                })
+            except:
+                pass
         return jsonify({
             "reply": raw,
             "emotion": "",
@@ -143,6 +161,5 @@ def chat():
             "safety_score": 98,
             "human_handoff": False
         })
-
 if __name__ == "__main__":
     app.run(debug=True)

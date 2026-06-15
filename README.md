@@ -216,5 +216,3 @@ This project is a direct extension of academic purpose and professional experien
 - **Crisis Text Line:** Text SHOUT to 85258
 - **Emergency:** 999
 ```
-
-Paste that into README.md, save with **Ctrl + S**, then push to GitHub!
