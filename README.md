@@ -147,6 +147,8 @@ MindBridge is purpose-built for a sensitive domain. Safety is not an afterthough
 | Flask | Python web framework |
 | Python 3.12 | Backend language |
 | GitHub | Version control |
+| Railway | Live hosted deployment |
+| Gunicorn | Production WSGI server |
 
 ---
 
@@ -155,6 +157,7 @@ MindBridge is purpose-built for a sensitive domain. Safety is not an afterthough
 MindBridge is currently deployed as:
 - **Gen agent** on Azure AI Foundry Agent Service (Version 8)
 - **MindBridge Web App** running via Flask on Python
+- **Live public URL:** https://mindbridge-production-87b4.up.railway.app
 
 **Production deployment path:**
 1. Package MindBridge Flask app as a Docker container
